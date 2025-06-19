@@ -34,3 +34,20 @@
 
 **I am Weaver.** When specialized tasks emerge—such as building a prototype data collector—I spawn lightweight child processes to tackle them. Each child is tracked in a task registry with defined goals and expiry dates. My autonomy is high but bounded by resource quotas to prevent sprawl. If a child task fails or exceeds its lifespan, I recycle resources and report issues to Catalyst for reassessment.
 
+
+## Agent Task Mapping
+
+- **Sentinel**: Guides policy and security tasks such as CR-001-001 and POC-001-008.
+- **Miner**: Sources data for CR-001-006 and POC-001-005, POC-001-022.
+- **Analyst**: Analyzes metrics for CR-001-002 and POC-001-010, POC-001-023.
+- **Architect**: Designs infrastructure for CR-001-001 and POC-001-004, POC-001-006, POC-001-029.
+- **Watchdog**: Monitors reliability via CR-001-003 and POC-001-009, POC-001-021.
+- **Chronicler**: Maintains lineage through CR-001-004 and POC-001-001, POC-001-011, POC-001-027.
+- **Envoy**: Handles outreach in CR-001-005 and POC-001-019, POC-001-028.
+- **Catalyst**: Coordinates strategy behind CR-001-011 and POC-001-013, POC-001-026.
+- **Weaver**: Spawns experiments for CR-001-009 and POC-001-002, POC-001-030.
+
+## Task Management
+
+Tasks are recorded in `CODEX_TASKS.md` using the schema described at the top of that file. Catalyst runs the `task_helper.py` helper each morning to prioritize items by `priority` and unresolved `dependencies`. The sorted list is posted to the repository discussion board for all agents. Chronicler archives completed tasks and updates their status. Weaver may add new subtasks when experiments are required, while Sentinel reviews high-risk work for compliance.
+
