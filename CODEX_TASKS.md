@@ -19,8 +19,8 @@ steps: |
 acceptance_criteria: |
   Measurable metrics or narrative tests demonstrating completion.
 ```
-id: CR-001-001
 
+id: CR-001-001
 title: Standardize sustainability data schema
 priority: P0
 phase: Architecture
@@ -1072,3 +1072,4 @@ acceptance_criteria: |
   - Interface available at local URL during test run.
   - Corrections file committed automatically after submission.
   - Analyst confirms the flow with at least one sample record.
+

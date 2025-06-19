@@ -50,3 +50,4 @@
 ## Task Management
 
 Tasks are recorded in `CODEX_TASKS.md` using the schema described at the top of that file. Catalyst runs the `task_helper.py` helper each morning to prioritize items by `priority` and unresolved `dependencies`. The sorted list is posted to the repository discussion board for all agents. Chronicler archives completed tasks and updates their status. Weaver may add new subtasks when experiments are required, while Sentinel reviews high-risk work for compliance.
+
