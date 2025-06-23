@@ -66,7 +66,7 @@ class ProjectState(TypedDict):
 
     # Deliverables
     master_plan: Optional[str]
-    financial_model: Optional
+    financial_model: Optional[str]
     compliance_report: Optional[str]
 ```
 
