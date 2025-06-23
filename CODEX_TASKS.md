@@ -1106,16 +1106,16 @@ effort: 5
 owner_hint: Architect
 dependencies:
 rationale: |
-  Early processing of project documents underpins automated task routing. A filesystem watcher combined with an LLM analysis service ensures new files immediately trigger the right workflows. This improves responsiveness and data quality from the start.
+  Timely ingestion of project documents is essential for orchestrator reliability. Without an automated pipeline, new design files or permit updates might sit unnoticed, delaying critical actions. A robust file watcher ensures every drop-in triggers immediate analysis. By pairing this watcher with a lightweight language model, the system can classify document type, extract key metadata, and hand off structured results to the main graph. This early automation forms the backbone for later agent workflows.
 steps: |
-  - Set up a watcher on the _intake/ directory to detect incoming files.
-  - Process text with an initial language model to extract routing cues.
-  - Pass structured results to the orchestration engine for further action.
+  - Implement a Python watchdog service that monitors the `_intake/` directory and queues events whenever a file appears or changes. Ensure the watcher recovers from transient filesystem errors and logs each action for Chronicler.
+  - Send new file contents to a basic LLM or open-source model that identifies document type, extracts relevant metadata, and packages the results in a typed structure such as a dataclass.
+  - Persist the structured result to ProjectState and invoke the main workflow, verifying that the orchestrator picks up the task and routes it to the next node automatically.
+  - Add unit tests to simulate file drops and confirm end-to-end execution through the pipeline.
 acceptance_criteria: |
   - New files in _intake/ invoke the pipeline automatically.
   - Extracted metadata correctly identifies at least two sample document types.
   - Logs show successful handoff into the LangGraph flow.
-
 id: AGENT-006
 title: Create entity agent blueprints
 priority: P2
@@ -1126,11 +1126,11 @@ effort: 3
 owner_hint: Architect
 dependencies:
 rationale: |
-  The blueprint proposes distinct agents for LandHoldCo, BuildCo, and PrinterCo. Providing skeleton nodes for these entities allows specialized logic to evolve separately without stalling the core orchestrator. Clear templates also help Weaver spawn derivative agents later.
+  Distinct agents representing LandHoldCo, BuildCo, and PrinterCo will eventually handle specialized negotiations, approvals, and print operations. Without placeholder nodes in the graph, these entities cannot be tested or extended in isolation. By defining blueprints now, the project avoids entangling early prototypes with production logic. Each blueprint clarifies expected tools and memory usage, making it straightforward for Weaver to spawn or modify child agents as capabilities expand.
 steps: |
-  - Define stub LangGraph nodes for each entity with placeholder tool calls.
-  - Register the nodes in the main graph for basic round‑trip testing.
-  - Document how additional skills will be plugged into each blueprint.
+  - Create a minimal LangGraph node class for each entity with a `run` method that logs incoming data and returns a simple acknowledgement. Keep the design generic so future implementations can drop in complex tool chains.
+  - Add these stub nodes to the main graph sequence following the document intake stage. Ensure the orchestrator can route sample data through each node in turn and that state updates are recorded.
+  - Write developer notes in `docs/agents.md` describing how to extend each blueprint with specialized tools or memory stores, enabling rapid iteration when new requirements emerge.
 acceptance_criteria: |
   - Repository contains three agent node definitions.
   - Test run shows each node executes in sequence without errors.
