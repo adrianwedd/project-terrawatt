@@ -1093,6 +1093,8 @@ acceptance_criteria: |
   - Repository contains ProjectState definition and starter graph.
   - Sqlite database persists workflow runs across restarts.
   - Sample execution demonstrates resumable state.
+status: Completed
+completion_date: 2025-06-23
 
 id: INFRA-002
 title: Build document intelligence pipeline
